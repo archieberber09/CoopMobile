@@ -1,0 +1,57 @@
+import React, { useState, useEffect } from 'react';
+import { Text, View, StyleSheet, Button,Linking } from 'react-native';
+import { BarCodeScanner } from 'expo-barcode-scanner';
+
+export default function Scan() {
+  const [hasPermission, setHasPermission] = useState(null);
+  const [scanned, setScanned] = useState(false);
+  const [data, setData] = useState('')
+
+  console.log(data)
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await BarCodeScanner.requestPermissionsAsync();
+      setHasPermission(status === 'granted');
+    })();
+  }, []);
+
+  const loadInBrowser = () => {
+    Linking.openURL(data).catch(err => console.error("Couldn't load page", err));
+  };
+
+  const handleBarCodeScanned = ({ _, data }) => {
+    setScanned(true);
+    alert(` ${data} has been scanned!`);
+    setData(data)
+    loadInBrowser()
+  };
+
+  if (hasPermission === null) {
+    return <Text>Requesting for camera permission</Text>;
+  }
+  if (hasPermission === false) {
+    return <Text>No access to camera</Text>;
+  }
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems:'center'
+      }}>
+      <View style={{height:200, width:200,
+        alignItems:"center",justifyContent: 'center',}}>
+      <BarCodeScanner
+        onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}
+        style={StyleSheet.absoluteFillObject}
+      />
+      </View>
+
+      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
+
+    </View>
+  );
+}
