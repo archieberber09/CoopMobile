@@ -63,7 +63,7 @@ const ListingsScreen = ({ navigation }) => {
           />
         )}
       />
-      <Button title='LogOut' onPress={()=>{navigation.navigate('Auth'),AsyncStorage.clear()}} />
+      <Button title='Log Out' onPress={()=>{navigation.push('Auth'),AsyncStorage.clear()}} />
     </Screen>
   );
 }

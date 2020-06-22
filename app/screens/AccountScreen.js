@@ -57,7 +57,7 @@ function AccountScreen({ navigation }) {
       <ListItem
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#b23b3b" />}
-        onPress={()=>{navigation.navigate('Auth')}}
+        onPress={()=>{navigation.push('Auth')}}
       />
     </Screen>
   );

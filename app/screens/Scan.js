@@ -5,9 +5,8 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 export default function Scan() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
-  const [data, setData] = useState('')
 
-  console.log(data)
+
 
   useEffect(() => {
     (async () => {
@@ -16,15 +15,12 @@ export default function Scan() {
     })();
   }, []);
 
-  const loadInBrowser = () => {
-    Linking.openURL(data).catch(err => console.error("Couldn't load page", err));
-  };
+
 
   const handleBarCodeScanned = ({ _, data }) => {
     setScanned(true);
     alert(` ${data} has been scanned!`);
-    setData(data)
-    loadInBrowser()
+    Linking.openURL(data).catch(err => console.error("Couldn't load page", err));
   };
 
   if (hasPermission === null) {

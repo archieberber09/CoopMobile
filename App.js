@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from "react";
-import { ActivityIndicator,View} from "react-native";
+import { View} from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import navigationTheme from "./app/navigation/navigationTheme";
 import {NotLoggedInNavigator,LoggedInNavigator} from "./app/navigation/AppNavigator";

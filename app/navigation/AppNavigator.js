@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
+import AsyncStorage from "@react-native-community/async-storage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -14,6 +15,7 @@ import Scan from '../screens/Scan'
 import routes from "./routes";
 
 
+
 // UrlApi
 
 const urlApi = 'http://192.168.1.7:8000/'
@@ -22,6 +24,8 @@ const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const AppNavigator = (props) => (
+
+  
 
   <Tab.Navigator>
     <Tab.Screen
@@ -81,10 +85,17 @@ const AuthNavigator = (props) => (
 
 // Is Logged In
 
+
+
 const LoggedInNavigator = (props) => (
+
+  
+  
   <Stack.Navigator>
+  
     <Stack.Screen name="Home" component={AppNavigator}    options={{ headerShown: false }} />
     <Stack.Screen name="Auth" component={AuthNavigator}  options={{ headerShown: false }} />
+    
    
   </Stack.Navigator>
   
@@ -96,7 +107,7 @@ const NotLoggedInNavigator = (props) => (
   <Stack.Navigator>
     <Stack.Screen name="Auth" component={AuthNavigator}   options={{ headerShown: false }} />
     <Stack.Screen name="Home" component={AppNavigator}  options={{ headerShown: false }} />
-    
+
   </Stack.Navigator>
   
 );
