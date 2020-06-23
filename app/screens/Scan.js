@@ -26,7 +26,7 @@ export default function Scan() {
         'Content-Type': 'application/json'
       }
     }).then(function(res){
-      alert(res.response.data);
+      alert(res.data.data);
     }).catch(function(error){
       alert(error.response.data.data);
     });
