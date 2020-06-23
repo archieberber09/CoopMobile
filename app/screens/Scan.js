@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button,Linking,Alert } from 'react-native';
+import { Text, View, StyleSheet, Button,Linking,Alert, ActivityIndicator } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
@@ -76,6 +76,7 @@ export default function Scan({navigation}) {
         style={StyleSheet.absoluteFillObject}
       />
       </View>
+      {scanned && <View><ActivityIndicator/></View>}
 
     </View>
   );

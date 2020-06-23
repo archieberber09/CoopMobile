@@ -65,7 +65,15 @@ const [loading,setLoading] = useState(false)
         );
         setLoading(false)
       }
-    });
+    }).catch(e=>{
+      Alert.alert(
+        "Error",
+        "Something went wrong, please try again",
+        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+        { cancelable: false }
+      )
+      setLoading(false)
+    })
     }
 
  }

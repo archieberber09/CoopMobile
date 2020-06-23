@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet,Button,BackHandler,Alert } from "react-native";
+import { FlatList, StyleSheet,Button,BackHandler,Alert,ActivityIndicator,Text } from "react-native";
 
 
 import Card from "../components/Card";
@@ -13,37 +13,25 @@ import axios from "axios";
 
 
 
-const listings = [
-  {
-    id: 1,
-    title: "Red jacket for sale",
-    price: 100,
-    image: require("../assets/jacket.jpg"),
-  },
-  {
-    id: 2,
-    title: "Couch in great condition",
-    price: 1000,
-    image: require("../assets/couch.jpg"),
-  },
-];
-
 const ListingsScreen = ({ navigation }) => {
 
   const [announcements,setAnnouncements] = useState([])
+  const [loading,setLoading] = useState(true)
+  const [error,setError] = useState(false)
 
   useEffect(() => {
     axios.get(GLOBALS.BASE_URL + 'api/auth/announcements')
     .then(function(res){
       // console.log(res.data.data);
       setAnnouncements(res.data.data)
-    });
-    return (res) => {
-      console.log(res);
-    }
+      setLoading(false)
+    }).catch(e=>{
+      console.log(e)
+      setError(true)
+      setLoading(false)
+    })
+    console.log(error)
   }, [])
-
-  console.log(announcements)
 
   useFocusEffect(
     React.useCallback(() => {
@@ -65,6 +53,22 @@ const ListingsScreen = ({ navigation }) => {
         BackHandler.removeEventListener("hardwareBackPress", onBackPress);
     
     }, []));
+
+  if(loading===true){
+    return (
+      <Screen style={styles.loader}>
+        <ActivityIndicator/>
+      </Screen>
+    );
+  }
+
+  if(error===true){
+    return(
+      <Screen style={styles.loader}>
+        <Text>Something went wrong please check your connections and reload the app</Text>
+      </Screen>
+    )
+  }
 
 
   return (
@@ -90,6 +94,12 @@ const styles = StyleSheet.create({
     padding: 20,
     backgroundColor: colors.light,
   },
+  loader:{
+    flex:1,
+    justifyContent:"center",
+    alignItems:"center",
+    paddingHorizontal:30
+  }
 });
 
 export default ListingsScreen;

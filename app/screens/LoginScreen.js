@@ -60,7 +60,6 @@ const LoginScreen = ({route,navigation}) => {
 
             }
         }catch(e) {
-          console.log(e)
           Alert.alert(
             "Error",
             "Something went wrong, please try again",
