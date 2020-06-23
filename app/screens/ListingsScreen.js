@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { FlatList, StyleSheet,Button,BackHandler,Alert } from "react-native";
+
 
 import Card from "../components/Card";
 import colors from "../config/colors";
@@ -7,6 +8,8 @@ import routes from "../navigation/routes";
 import { useFocusEffect } from "@react-navigation/native";
 import Screen from "../components/Screen";
 import AsyncStorage from "@react-native-community/async-storage";
+import GLOBALS from '../../globals'; 
+import axios from "axios";
 
 
 
@@ -26,6 +29,21 @@ const listings = [
 ];
 
 const ListingsScreen = ({ navigation }) => {
+
+  const [announcements,setAnnouncements] = useState([])
+
+  useEffect(() => {
+    axios.get(GLOBALS.BASE_URL + 'api/auth/announcements')
+    .then(function(res){
+      // console.log(res.data.data);
+      setAnnouncements(res.data.data)
+    });
+    return (res) => {
+      console.log(res);
+    }
+  }, [])
+
+  console.log(announcements)
 
   useFocusEffect(
     React.useCallback(() => {
@@ -52,18 +70,17 @@ const ListingsScreen = ({ navigation }) => {
   return (
     <Screen style={styles.screen}>
       <FlatList
-        data={listings}
-        keyExtractor={(listing) => listing.id.toString()}
+        data={announcements}
+        keyExtractor={(announcement) => announcement.id.toString()}
         renderItem={({ item }) => (
           <Card
             title={item.title}
-            subTitle={"$" + item.price}
-            image={item.image}
+            subTitle={item.body}
+            // image={item.image}
             onPress={() => navigation.navigate(routes.LISTING_DETAILS, item)}
           />
         )}
       />
-      <Button title='Log Out' onPress={()=>{navigation.push('Auth'),AsyncStorage.clear()}} />
     </Screen>
   );
 }

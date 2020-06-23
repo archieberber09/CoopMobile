@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet,Alert,View,ActivityIndicator } from "react-native";
 import * as Yup from "yup";
+import GLOBALS from '../../globals';
 
 import Screen from "../components/Screen";
 import { Form, FormField, SubmitButton } from "../components/forms";
@@ -43,7 +44,7 @@ const [loading,setLoading] = useState(false)
         })
     }
 
-    fetch( route.params.urlApi + "api/auth/signup",apiOptions)
+    fetch( GLOBALS.BASE_URL + "api/auth/signup",apiOptions)
     .then(res=>res.json())
     .then(res=>{
       if(res.errors){

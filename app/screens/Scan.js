@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet, Button,Linking } from 'react-native';
+import { Text, View, StyleSheet, Button,Linking,Alert } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import AsyncStorage from "@react-native-community/async-storage";
 import axios from 'axios';
-export default function Scan() {
+export default function Scan({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
 
@@ -23,12 +23,34 @@ export default function Scan() {
     console.log(data);
     axios.get(data,{
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
       }
     }).then(function(res){
-      alert(res.data.data);
+      console.log(res)
+      Alert.alert(
+        "",
+        res.data.data,
+        [{ text: "Ok", onPress: () => setScanned(false) }],
+        { cancelable: false }
+      );
     }).catch(function(error){
-      alert(error.response.data.data);
+      try{
+        Alert.alert(
+          "",
+          error.response.data.data,
+          [{ text: "Ok", onPress: () => setScanned(false) }],
+          { cancelable: false }
+        );
+      }catch{
+        Alert.alert(
+          "Something went wrong",
+          "You might be scanning an invalid Qr Code or you have no network connection",
+          [{ text: "Ok", onPress: () => setScanned(false) }],
+          { cancelable: false }
+        );
+      }
+     
     });
   };
 
@@ -54,8 +76,6 @@ export default function Scan() {
         style={StyleSheet.absoluteFillObject}
       />
       </View>
-
-      {scanned && <Button title={'Tap to Scan Again'} onPress={() => setScanned(false)} />}
 
     </View>
   );
