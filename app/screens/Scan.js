@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Text, View, StyleSheet, Button,Linking } from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
-
+import AsyncStorage from "@react-native-community/async-storage";
+import axios from 'axios';
 export default function Scan() {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
@@ -19,8 +20,16 @@ export default function Scan() {
 
   const handleBarCodeScanned = ({ _, data }) => {
     setScanned(true);
-    alert(` ${data} has been scanned!`);
-    Linking.openURL(data).catch(err => console.error("Couldn't load page", err));
+    console.log(data);
+    axios.get(data,{
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then(function(res){
+      alert(res.response.data);
+    }).catch(function(error){
+      alert(error.response.data.data);
+    });
   };
 
   if (hasPermission === null) {
@@ -38,7 +47,7 @@ export default function Scan() {
         justifyContent: 'center',
         alignItems:'center'
       }}>
-      <View style={{height:200, width:200,
+      <View style={{height:500, width:500,
         alignItems:"center",justifyContent: 'center',}}>
       <BarCodeScanner
         onBarCodeScanned={scanned ? undefined : handleBarCodeScanned}

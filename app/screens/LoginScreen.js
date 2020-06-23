@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import { StyleSheet, Image,ActivityIndicator,Alert,View} from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Yup from "yup";
+import GLOBALS from '../../globals'; 
 
 import Screen from "../components/Screen";
 import { Form, FormField, SubmitButton } from "../components/forms";
@@ -34,17 +35,18 @@ const LoginScreen = ({route,navigation}) => {
                 password:values.password
               }),
             };
-            const fetchData = await fetch( route.params.urlApi + "api/auth/login",apiOptions);
+            const fetchData = await fetch( GLOBALS.BASE_URL + "api/auth/login",apiOptions);
             var data = await fetchData.json();
             console.log(data);
             if (data.status === "success") {
               console.log("successful Login");
               let id = data.id;
-              let stringId = id.toString();
+              // let stringId = id.toString();
               navigation.navigate("Home");
               AsyncStorage.multiSet([
-                ["id", stringId],
+                // ["id", stringId],
                 ["name", data.data.user.name],
+                ["token",data.data.token],
                 ["isLoggedIn","1"]
               ]);
 

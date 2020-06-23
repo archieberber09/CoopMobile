@@ -18,7 +18,7 @@ import routes from "./routes";
 
 // UrlApi
 
-const urlApi = 'http://192.168.1.7:8000/'
+const urlApi = 'http://192.168.100.7:8000/'
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();

@@ -5,6 +5,21 @@ import navigationTheme from "./app/navigation/navigationTheme";
 import {NotLoggedInNavigator,LoggedInNavigator} from "./app/navigation/AppNavigator";
 // import AuthNavigator from "./app/navigation/AuthNavigator";
 import AsyncStorage from "@react-native-community/async-storage";
+import axios from 'axios'
+
+axios.interceptors.request.use(
+  async config => {
+    const token = await AsyncStorage.getItem('token')
+    if (token) {
+      config.headers.Authorization = "Bearer "+token
+    }
+    return config
+  },
+  error => {
+    return Promise.reject(error)
+  }
+);
+
 
 export default App = () => {
 
