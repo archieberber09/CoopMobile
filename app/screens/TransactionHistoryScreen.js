@@ -1,50 +1,12 @@
-import React, { useState } from "react";
-import { StyleSheet, Image } from "react-native";
-import * as Yup from "yup";
+import React from "react";
+import { StyleSheet, View } from "react-native";
 
-import Screen from "../components/Screen";
-import { Form, FormField, SubmitButton } from "../components/forms";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-});
-
-function TransactionHistory() {
+export default function TransactionHistoryScreen() {
   return (
-    <Screen style={styles.container}>
-      <Image style={styles.logo} source={require("../assets/logo.png")} />
-
-      <Form
-        initialValues={{ email: "" }}
-        // onSubmit={(values) => handleLogin(values)} need to create handleTransactionHistory
-        validationSchema={validationSchema}
-      >
-        <FormField
-          autoCapitalize="none"
-          autoCorrect={false}
-          icon="email"
-          keyboardType="email-address"
-          name="email"
-          placeholder="Email"
-          textContentType="emailAddress"
-        />
-        <SubmitButton title="View Recent Transactions" />
-      </Form>
-    </Screen>
+    <View>
+      <Card title="Transaction" subTitle="Amount" />
+    </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    padding: 10,
-  },
-  logo: {
-    width: 122,
-    height: 110,
-    alignSelf: "center",
-    marginTop: 50,
-    marginBottom: 20,
-  },
-});
-
-export default TransactionHistory;
+const styles = StyleSheet.create({});
