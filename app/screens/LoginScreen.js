@@ -18,8 +18,7 @@ const validationSchema = Yup.object().shape({
   password: Yup.string().required().min(8).label("Password"),
 });
 
-const LoginScreen = ({ route, navigation }) => {
-  console.log(route.params.urlApi + "api/auth/login");
+const LoginScreen = ({ navigation }) => {
 
   const [loading, setLoading] = useState(false);
 

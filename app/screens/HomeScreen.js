@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, Button } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import PointsIndicator from "../components/PointsIndicator";
@@ -15,6 +15,7 @@ function HomeScreen() {
         <PointsIndicator title="10" subTitle="Points Available" />
         <Widgets />
       </View>
+      
     </Screen>
   );
 }
