@@ -1,4 +1,4 @@
-import React,{useEffect,useState} from "react";
+import React, { useEffect, useState } from "react";
 import AsyncStorage from "@react-native-community/async-storage";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -6,27 +6,24 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 import AccountNavigator from "./AccountNavigator";
 import FeedNavigator from "./FeedNavigator";
-import ListingEditScreen from "../screens/ListingEditScreen";
 import NewListingButton from "./NewListingButton";
 import LoginScreen from "../screens/LoginScreen";
 import RegisterScreen from "../screens/RegisterScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
-import Scan from '../screens/Scan'
-import routes from "./routes";
-
-
+import Scan from "../screens/Scan";
+import ForgotPassword from "../screens/ForgotPassword";
+import Cashout from "../screens/CashoutScreen";
+import TransactionHistory from "../screens/TransactionHistoryScreen";
+import UpdateProfile from "../screens/UpdateProfileScreen";
 
 // UrlApi
 
-const urlApi = 'http://192.168.100.7:8000/'
+const urlApi = "http://192.168.56.1:8000/";
 
 const Tab = createBottomTabNavigator();
 const Stack = createStackNavigator();
 
 const AppNavigator = (props) => (
-
-  
-
   <Tab.Navigator>
     <Tab.Screen
       name="Home"
@@ -42,9 +39,7 @@ const AppNavigator = (props) => (
       component={Scan}
       options={({ navigation }) => ({
         tabBarButton: () => (
-          <NewListingButton
-            onPress={() => navigation.navigate('Scan')}
-          />
+          <NewListingButton onPress={() => navigation.navigate("Scan")} />
         ),
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons
@@ -64,8 +59,7 @@ const AppNavigator = (props) => (
         ),
       }}
     />
-    
-  </Tab.Navigator> 
+  </Tab.Navigator>
 );
 
 const AuthNavigator = (props) => (
@@ -75,44 +69,76 @@ const AuthNavigator = (props) => (
       component={WelcomeScreen}
       options={{ headerShown: false }}
     />
-    <Stack.Screen name="Login" component={LoginScreen} initialParams={{ urlApi: urlApi }} />
-    <Stack.Screen name="Register" component={RegisterScreen} initialParams={{ urlApi: urlApi }} />
-    <Stack.Screen name="Home" component={AppNavigator}  options={{ headerShown: false }} />
+    <Stack.Screen
+      name="Login"
+      component={LoginScreen}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="Register"
+      component={RegisterScreen}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="ForgotPassword"
+      component={ForgotPassword}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="Cashout"
+      component={Cashout}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="TransactionHistory"
+      component={TransactionHistory}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="UpdateProfile"
+      component={UpdateProfile}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="Home"
+      component={AppNavigator}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
-  
 );
-
 
 // Is Logged In
 
-
-
 const LoggedInNavigator = (props) => (
-
-  
-  
   <Stack.Navigator>
-  
-    <Stack.Screen name="Home" component={AppNavigator}    options={{ headerShown: false }} />
-    <Stack.Screen name="Auth" component={AuthNavigator}  options={{ headerShown: false }} />
-    
-   
+    <Stack.Screen
+      name="Home"
+      component={AppNavigator}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Auth"
+      component={AuthNavigator}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
-  
 );
 
 // Not Logged In
 
 const NotLoggedInNavigator = (props) => (
   <Stack.Navigator>
-    <Stack.Screen name="Auth" component={AuthNavigator}   options={{ headerShown: false }} />
-    <Stack.Screen name="Home" component={AppNavigator}  options={{ headerShown: false }} />
-
+    <Stack.Screen
+      name="Auth"
+      component={AuthNavigator}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Home"
+      component={AppNavigator}
+      options={{ headerShown: false }}
+    />
   </Stack.Navigator>
-  
 );
 
-
-
-
-export {NotLoggedInNavigator,LoggedInNavigator};
+export { NotLoggedInNavigator, LoggedInNavigator };

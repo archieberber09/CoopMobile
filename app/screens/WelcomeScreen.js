@@ -1,12 +1,19 @@
 import React from "react";
-import { ImageBackground, StyleSheet, View, Image, Text, BackHandler,Alert } from "react-native";
+import {
+  ImageBackground,
+  StyleSheet,
+  View,
+  Image,
+  Text,
+  BackHandler,
+  Alert,
+} from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import Button from "../components/Button";
 import defaultStyles from "../config/styles";
 import routes from "../navigation/routes";
 
 const WelcomeScreen = ({ navigation }) => {
-
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
@@ -14,20 +21,19 @@ const WelcomeScreen = ({ navigation }) => {
           {
             text: "Cancel",
             onPress: () => null,
-            style: "cancel"
+            style: "cancel",
           },
-          { text: "YES", onPress: () => BackHandler.exitApp() }
+          { text: "YES", onPress: () => BackHandler.exitApp() },
         ]);
         return true;
       };
-    
+
       BackHandler.addEventListener("hardwareBackPress", onBackPress);
-    
+
       return () =>
         BackHandler.removeEventListener("hardwareBackPress", onBackPress);
-    
-    }, []));
-
+    }, [])
+  );
 
   return (
     <ImageBackground
@@ -52,7 +58,7 @@ const WelcomeScreen = ({ navigation }) => {
       </View>
     </ImageBackground>
   );
-}
+};
 
 const styles = StyleSheet.create({
   background: {

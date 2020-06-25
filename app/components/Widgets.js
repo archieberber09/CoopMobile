@@ -1,8 +1,9 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity } from "react-native";
+import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native";
 
 import Icon from "./Icon";
 import Text from "./Text";
+import CategoryPickerItem from "./CategoryPickerItem";
 
 const categories = [
   {
@@ -41,52 +42,39 @@ const categories = [
     label: "Sports",
     value: 6,
   },
-  {
-    backgroundColor: "#4b7bec",
-    icon: "headphones",
-    label: "Movies & Music",
-    value: 7,
-  },
-  {
-    backgroundColor: "#a55eea",
-    icon: "book-open-variant",
-    label: "Books",
-    value: 8,
-  },
-  {
-    backgroundColor: "#778ca3",
-    icon: "application",
-    label: "Other",
-    value: 9,
-  },
 ];
 
-function CategoryPickerItem({ item, onPress }) {
+function Widgets({ item, numColumns = 3 }) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onPress}>
-        <Icon
-          backgroundColor={item.backgroundColor}
-          name={item.icon}
-          size={80}
-        />
-      </TouchableOpacity>
-      <Text style={styles.label}>{item.label}</Text>
+      <FlatList
+        data={categories}
+        keyExtractor={(item) => item.value.toString()}
+        numColumns={3}
+        renderItem={({ item }) => (
+          <TouchableOpacity>
+            <Icon
+              backgroundColor={item.backgroundColor}
+              name={item.icon}
+              size={80}
+            />
+            <Text style={styles.title}>{item.label}</Text>
+          </TouchableOpacity>
+        )}
+      />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 30,
-    paddingVertical: 15,
     alignItems: "center",
-    width: "33%",
+    // width: "33%",
   },
-  label: {
+  title: {
     marginTop: 5,
     textAlign: "center",
   },
 });
 
-export default CategoryPickerItem;
+export default Widgets;

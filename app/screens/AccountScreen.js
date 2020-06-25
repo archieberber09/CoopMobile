@@ -9,19 +9,28 @@ import Screen from "../components/Screen";
 
 const menuItems = [
   {
-    title: "My Points",
+    title: "Cashout",
     icon: {
-      name: "plus-circle",
+      name: "cash",
       backgroundColor: colors.primary,
     },
+    targetScreen: routes.CASHOUT,
   },
   {
-    title: "My Notifications",
+    title: "Transaction History",
     icon: {
-      name: "bell-outline",
+      name: "history",
       backgroundColor: colors.secondary,
     },
-    targetScreen: routes.MESSAGES,
+    targetScreen: routes.TRANSACTION_HISTORY,
+  },
+  {
+    title: "Update Profile",
+    icon: {
+      name: "account-details",
+      backgroundColor: colors.medium,
+    },
+    targetScreen: routes.UPDATE_PROFILE,
   },
 ];
 
@@ -30,9 +39,9 @@ function AccountScreen({ navigation }) {
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="Wilean Borja"
-          subTitle="something@guerilla360.com"
-          image={require("../assets/wil.jpg")}
+          title="User"
+          subTitle="user@email.com"
+          // image={require("../assets/wil.jpg")}
         />
       </View>
       <View style={styles.container}>
@@ -57,7 +66,9 @@ function AccountScreen({ navigation }) {
       <ListItem
         title="Log Out"
         IconComponent={<Icon name="logout" backgroundColor="#b23b3b" />}
-        onPress={()=>{navigation.push('Auth'),AsyncStorage.clear()}}
+        onPress={() => {
+          navigation.push("Auth"), AsyncStorage.clear();
+        }}
       />
     </Screen>
   );
