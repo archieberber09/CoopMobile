@@ -3,48 +3,48 @@ import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native";
 
 import Icon from "./Icon";
 import Text from "./Text";
-import CategoryPickerItem from "./CategoryPickerItem";
+import colors from "../config/colors";
 
 const categories = [
   {
     backgroundColor: "#fc5c65",
-    icon: "floor-lamp",
-    label: "Furniture",
+    icon: "map-marker",
+    label: "Locations",
     value: 1,
   },
   {
     backgroundColor: "#fd9644",
-    icon: "car",
-    label: "Cars",
+    icon: "information-outline",
+    label: "About Us",
     value: 2,
   },
   {
     backgroundColor: "#fed330",
-    icon: "camera",
-    label: "Cameras",
+    icon: "format-align-left",
+    label: "Instructions",
     value: 3,
   },
   {
     backgroundColor: "#26de81",
-    icon: "cards",
-    label: "Games",
+    icon: "message-text",
+    label: "Contact Us",
     value: 4,
   },
   {
     backgroundColor: "#2bcbba",
-    icon: "shoe-heel",
-    label: "Clothing",
+    icon: "blogger",
+    label: "Blogs",
     value: 5,
   },
   {
     backgroundColor: "#45aaf2",
-    icon: "basketball",
-    label: "Sports",
+    icon: "settings-outline",
+    label: "Settings",
     value: 6,
   },
 ];
 
-function Widgets({ item, numColumns = 3 }) {
+function Widgets() {
   return (
     <View style={styles.container}>
       <FlatList
@@ -52,7 +52,7 @@ function Widgets({ item, numColumns = 3 }) {
         keyExtractor={(item) => item.value.toString()}
         numColumns={3}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity style={styles.icon}>
             <Icon
               backgroundColor={item.backgroundColor}
               name={item.icon}
@@ -69,7 +69,11 @@ function Widgets({ item, numColumns = 3 }) {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    // width: "33%",
+    width: "100%",
+  },
+  icon: {
+    marginHorizontal: 20,
+    marginVertical: 20,
   },
   title: {
     marginTop: 5,

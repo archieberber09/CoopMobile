@@ -13,7 +13,7 @@ function PointsIndicator({ title, subTitle, onPress }) {
           <Text style={styles.title} numberOfLines={1}>
             {title}
           </Text>
-          <Text style={styles.subTitle} numberOfLines={2}>
+          <Text style={styles.subTitle} numberOfLines={1}>
             {subTitle}
           </Text>
         </View>
@@ -37,9 +37,8 @@ const styles = StyleSheet.create({
 
   subTitle: {
     color: colors.white,
-    fontWeight: "bold",
     alignSelf: "center",
-    fontSize: 30,
+    fontSize: 20,
   },
   title: {
     marginBottom: 5,

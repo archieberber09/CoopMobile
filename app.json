@@ -23,7 +23,7 @@
       ]
     },
     "splash": {
-      "image": "./app/assets/splash.png",
+      "image": "./app/assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
