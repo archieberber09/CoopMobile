@@ -12,9 +12,11 @@ import RegisterScreen from "../screens/RegisterScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
 import Scan from "../screens/Scan";
 import ForgotPassword from "../screens/ForgotPassword";
-import Cashout from "../screens/CashoutScreen";
-import TransactionHistory from "../screens/TransactionHistoryScreen";
-import UpdateProfile from "../screens/UpdateProfileScreen";
+import CashoutScreen from "../screens/CashoutScreen";
+import PointsHistoryScreen from "../screens/PointsHistoryScreen";
+import UpdateProfileScreen from "../screens/UpdateProfileScreen";
+import CashoutHistoryScreen from "../screens/CashoutHistoryScreen";
+import LocationsScreens from "../screens/LocationsScreen";
 
 // UrlApi
 
@@ -70,6 +72,11 @@ const AuthNavigator = (props) => (
       options={{ headerShown: false }}
     />
     <Stack.Screen
+      name="Locations"
+      component={LocationsScreens}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
       name="Login"
       component={LoginScreen}
       initialParams={{ urlApi: urlApi }}
@@ -86,17 +93,22 @@ const AuthNavigator = (props) => (
     />
     <Stack.Screen
       name="Cashout"
-      component={Cashout}
+      component={CashoutScreen}
       initialParams={{ urlApi: urlApi }}
     />
     <Stack.Screen
-      name="TransactionHistory"
-      component={TransactionHistory}
+      name="CashoutHistory"
+      component={CashoutHistoryScreen}
+      initialParams={{ urlApi: urlApi }}
+    />
+    <Stack.Screen
+      name="PointsHistory"
+      component={PointsHistoryScreen}
       initialParams={{ urlApi: urlApi }}
     />
     <Stack.Screen
       name="UpdateProfile"
-      component={UpdateProfile}
+      component={UpdateProfileScreen}
       initialParams={{ urlApi: urlApi }}
     />
     <Stack.Screen

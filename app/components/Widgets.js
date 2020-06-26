@@ -4,6 +4,7 @@ import { FlatList, View, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "./Icon";
 import Text from "./Text";
 import colors from "../config/colors";
+import routes from "../navigation/routes";
 
 const categories = [
   {
@@ -11,6 +12,7 @@ const categories = [
     icon: "map-marker",
     label: "Locations",
     value: 1,
+    targetScreen: routes.LOCATIONS,
   },
   {
     backgroundColor: "#fd9644",
@@ -56,7 +58,7 @@ function Widgets() {
             <Icon
               backgroundColor={item.backgroundColor}
               name={item.icon}
-              size={80}
+              size={60}
             />
             <Text style={styles.title}>{item.label}</Text>
           </TouchableOpacity>
@@ -73,11 +75,14 @@ const styles = StyleSheet.create({
   },
   icon: {
     marginHorizontal: 20,
-    marginVertical: 20,
+    marginVertical: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
   title: {
     marginTop: 5,
     textAlign: "center",
+    fontSize: 13,
   },
 });
 

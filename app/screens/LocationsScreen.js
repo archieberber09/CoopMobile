@@ -9,57 +9,38 @@ import Screen from "../components/Screen";
 
 const options = [
   {
-    title: "Cashout",
+    title: "Alabang",
     icon: {
-      name: "cash",
+      name: "crosshairs-gps",
       backgroundColor: colors.primary,
     },
-    targetScreen: routes.CASHOUT,
   },
   {
-    title: "Cashout History",
+    title: "Baseco",
     icon: {
-      name: "av-timer",
+      name: "crosshairs-gps",
       backgroundColor: colors.primary,
     },
-    targetScreen: routes.CASHOUT_HISTORY,
   },
   {
-    title: "Points History",
+    title: "Cavite",
     icon: {
-      name: "history",
+      name: "crosshairs-gps",
       backgroundColor: colors.primary,
     },
-    targetScreen: routes.POINTS_HISTORY,
   },
   {
-    title: "Update Profile",
+    title: "Muntinlupa",
     icon: {
-      name: "account-details",
+      name: "crosshairs-gps",
       backgroundColor: colors.primary,
     },
-    targetScreen: routes.UPDATE_PROFILE,
   },
 ];
 
 function AccountScreen({ navigation }) {
-  const [name, setName] = useState("  ");
-
-  useEffect(() => {
-    AsyncStorage.getItem("name").then((value) => {
-      setName(value);
-    });
-  });
-
   return (
     <Screen style={styles.screen}>
-      <View style={styles.userContainer}>
-        <ListItem
-          title="User"
-          subTitle={name}
-          // image={require("../assets/wil.jpg")}
-        />
-      </View>
       <View style={styles.optionsContainer}>
         <FlatList
           data={options}
@@ -79,13 +60,6 @@ function AccountScreen({ navigation }) {
           )}
         />
       </View>
-      <ListItem
-        title="Log Out"
-        IconComponent={<Icon name="logout" backgroundColor="#b23b3b" />}
-        onPress={() => {
-          navigation.push("Auth"), AsyncStorage.clear();
-        }}
-      />
     </Screen>
   );
 }
@@ -95,9 +69,6 @@ const styles = StyleSheet.create({
     backgroundColor: colors.light,
   },
   optionsContainer: {
-    marginBottom: 50,
-  },
-  userContainer: {
     marginBottom: 50,
   },
 });

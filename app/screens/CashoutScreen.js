@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { StyleSheet, Image,Alert,ActivityIndicator } from "react-native";
+import { StyleSheet, Image, Alert, ActivityIndicator } from "react-native";
 import * as Yup from "yup";
-import axios from 'axios'
+import axios from "axios";
 import GLOBALS from "../../globals";
 
 import Screen from "../components/Screen";
@@ -12,61 +12,56 @@ const validationSchema = Yup.object().shape({
   amount: Yup.number().required().label("Amount"),
 });
 
-function Cashout() {
-  
-  const [loading,setLoading] = useState(false)
+function CashoutScreen() {
+  const [loading, setLoading] = useState(false);
 
   const handleCashOut = (value) => {
-    setLoading(true)
+    setLoading(true);
 
-    try{
-
+    try {
       let data = {
-        amount:value.amount,
-        gcash_number:value.gcash_number
-
-    }
-    axios.post( GLOBALS.BASE_URL + 'api/auth/cashouts',data).then(res=>{
-      Alert.alert(
-        "",
-        "Succesful!",
-        [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-        { cancelable: false }
-      );
-      setLoading(false)
-    }).catch(
-      e=>{
-        Alert.alert(
-          "Error",
-          "Something went Wrong",
-          [{ text: "OK", onPress: () => console.log("OK Pressed") }],
-          { cancelable: false }
-        );
-        setLoading(false)
-
-      }
-    )
-
-    }catch(e){
-      console.log(e)
+        amount: value.amount,
+        gcash_number: value.gcash_number,
+      };
+      axios
+        .post(GLOBALS.BASE_URL + "api/auth/cashouts", data)
+        .then((res) => {
+          Alert.alert(
+            "",
+            "Succesful!",
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+          setLoading(false);
+        })
+        .catch((e) => {
+          Alert.alert(
+            "Error",
+            "Something went Wrong",
+            [{ text: "OK", onPress: () => console.log("OK Pressed") }],
+            { cancelable: false }
+          );
+          setLoading(false);
+        });
+    } catch (e) {
+      console.log(e);
       Alert.alert(
         "Error",
         "Something went Wrong",
         [{ text: "OK", onPress: () => console.log("OK Pressed") }],
         { cancelable: false }
       );
-      setLoading(false)
+      setLoading(false);
     }
-}
+  };
 
-  if(loading===true){
-    return(
+  if (loading === true) {
+    return (
       <Screen style={styles.loader}>
-        <ActivityIndicator/>
+        <ActivityIndicator />
       </Screen>
-    )
+    );
   }
-
 
   return (
     <Screen style={styles.container}>
@@ -109,12 +104,12 @@ const styles = StyleSheet.create({
     marginTop: 50,
     marginBottom: 20,
   },
-  loader:{
-    flex:1,
-    justifyContent:"center",
-    alignItems:"center",
-    paddingHorizontal:30
-  }
+  loader: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    paddingHorizontal: 30,
+  },
 });
 
-export default Cashout;
+export default CashoutScreen;

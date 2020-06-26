@@ -5,13 +5,16 @@ import {
   ActivityIndicator,
   Alert,
   View,
+  TouchableOpacity,
 } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import * as Yup from "yup";
 import GLOBALS from "../../globals";
 
 import Screen from "../components/Screen";
+import Text from "../components/Text";
 import { Form, FormField, SubmitButton } from "../components/forms";
+import colors from "../config/colors";
 
 const validationSchema = Yup.object().shape({
   email: Yup.string().required().email().label("Email"),
@@ -19,7 +22,6 @@ const validationSchema = Yup.object().shape({
 });
 
 const LoginScreen = ({ navigation }) => {
-
   const [loading, setLoading] = useState(false);
 
   const handleLogin = async (values) => {
@@ -106,6 +108,9 @@ const LoginScreen = ({ navigation }) => {
           secureTextEntry
           textContentType="password"
         />
+        <TouchableOpacity style={styles.forgotContainer}>
+          <Text style={styles.forgot}>Forgot Password?</Text>
+        </TouchableOpacity>
         <SubmitButton title="Login" />
       </Form>
     </Screen>
@@ -116,11 +121,20 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
+  forgotContainer: {
+    marginVertical: 5,
+    marginHorizontal: 15,
+  },
+  forgot: {
+    fontSize: 15,
+    color: colors.secondary,
+    fontWeight: "bold",
+  },
   logo: {
     width: 122,
     height: 110,
     alignSelf: "center",
-    marginTop: 50,
+    marginTop: 30,
     marginBottom: 20,
   },
 });
