@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { StyleSheet, View, FlatList } from "react-native";
 import AsyncStorage from "@react-native-community/async-storage";
 import { ListItem, ListItemSeparator } from "../components/lists";
@@ -8,6 +8,7 @@ import routes from "../navigation/routes";
 import Screen from "../components/Screen";
 
 const menuItems = [
+  
   {
     title: "Cashout",
     icon: {
@@ -35,12 +36,24 @@ const menuItems = [
 ];
 
 function AccountScreen({ navigation }) {
+
+  const [name,setName] = useState('  ')
+
+
+  useEffect(()=>{
+    AsyncStorage.getItem("name").then(value=>{
+      setName(value)
+    })
+
+  })
+
   return (
     <Screen style={styles.screen}>
       <View style={styles.container}>
         <ListItem
-          title="User"
-          subTitle="user@email.com"
+          
+          title='User'
+          subTitle={name}
           // image={require("../assets/wil.jpg")}
         />
       </View>

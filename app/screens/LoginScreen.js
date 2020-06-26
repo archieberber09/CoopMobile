@@ -44,11 +44,11 @@ const LoginScreen = ({ navigation }) => {
       console.log(data);
       if (data.status === "success") {
         console.log("successful Login");
-        let id = data.id;
-        // let stringId = id.toString();
+        let id = data.data.user.id;
+        let stringId = id.toString();
         navigation.navigate("Home");
         AsyncStorage.multiSet([
-          // ["id", stringId],
+          ["id", stringId],
           ["name", data.data.user.name],
           ["token", data.data.token],
           ["isLoggedIn", "1"],
