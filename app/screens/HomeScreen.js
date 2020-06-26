@@ -35,23 +35,30 @@ function HomeScreen() {
   const [userId,setUserId] = useState('')
   const [user,setUser] = useState(null)
   const [loading,setLoading] = useState(true)
+  const [timeLeft, setTimeLeft] = useState(null);
 
   useEffect(()=>{
-    const checkingUser = async () => {
-    await AsyncStorage.getItem("id").then(value=>{
-      axios.get(GLOBALS.BASE_URL + 'api/auth/users/' +value)
-      .then(function(res){
-        setUser(res.data.data);
-        
-      }).catch(
-        e=>{
-          console.log(e)
-          setUser('Error')
+    try{
+      const checkingUser = async () => {
+        await AsyncStorage.getItem("id").then(value=>{
+          axios.get(GLOBALS.BASE_URL + 'api/auth/users/' +value)
+          .then(function(res){
+            setUser(res.data.data);
+            
+          }).catch(
+            e=>{
+              console.log(e)
+              setUser('Error')
+            }
+          )
+        })
         }
-      )
-    })
+        checkingUser()
+
+    }catch{
+      setUser('Error')
     }
-  checkingUser()
+ 
     
   },[])
 
